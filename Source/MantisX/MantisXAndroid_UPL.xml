@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+	<init>
+		<log text="[MantisX] MantisX Initialization" />
+	</init>
+
+	<prebuildCopies>
+		<copyDir src="$S(PluginDir)/Private/Java" dst="$S(BuildDir)/src/com/chimeraxr/mantisapi" />
+	</prebuildCopies>
+
+	<proguardAdditions>
+		<insert>
+			-keep public class com.chimeraxr.mantisapi.** {
+			public protected *;
+			}
+		</insert>
+	</proguardAdditions>
+
+	<androidManifestUpdates>
+		<!-- Extra required permissions -->
+		<addPermission android:name="android.permission.BLUETOOTH"/>
+		<addPermission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+		<!-- May need to disable for Quest?? -->
+		<addPermission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+		<addFeature android:name="android.hardware.bluetooth_le" android:required="false"/>
+	</androidManifestUpdates>
+
+	<buildGradleAdditions>
+	</buildGradleAdditions>
+</root>
